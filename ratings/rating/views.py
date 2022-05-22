@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
-from django.views.decorators.csrf import requires_csrf_token
+from django.views.decorators.csrf import ensure_csrf_cookie
 from .forms import RatingAndReviewsForm
 from .helpers import calculate_score, review_number_of_reviews, review_score
 
@@ -10,7 +10,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-@requires_csrf_token
+@ensure_csrf_cookie
 def review_ratings(request):
     if request.method == 'POST':
         form = RatingAndReviewsForm(request.POST)
