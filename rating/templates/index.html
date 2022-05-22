@@ -1,0 +1,24 @@
+<head>
+    <title>Home | R8D</title>
+</head>
+{% include 'base.html' %}
+{% block content %}
+<style>
+  body {background-color: #1E2023;}
+</style>
+<div class="container" style="padding-top:30px;">
+  <div class="row">
+    <div class="col-12">
+      <h1 style="text-align:center; color:white;">Ratings.com</h1>
+      <p class="lead" style="color:white;">
+        The best app for reviewing customer ratings and determining whether you
+        should keep your money in your pocket or take out your wallet.
+      </p>
+      <p style="text-align:center; padding-bottom:20px; color:white;">Click the button below to try it for free!</p>
+      <div style="text-align:center;">
+        <a href="{% url 'review_ratings' %}" class="btn btn-primary btn-lg btn-dark" role="button" aria-disabled="false">Review a Rating!</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

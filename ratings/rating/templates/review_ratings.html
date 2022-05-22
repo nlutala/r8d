@@ -1,0 +1,65 @@
+<head>
+    <title>Review a Rating | R8D</title>
+</head>
+{% include 'base.html' %}
+{% block content %}
+<style>
+  body {background-color: #1E2023;}
+</style>
+<div class="container" style="padding-top:30px;">
+  <h1 style="text-align:center; color:white;">Review a Rating</h1>
+  <div class="col">
+    <form action="{% url 'review_ratings' %}" method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div style="text-align:center; padding-top:20px;">
+        <div class="col-md">
+          <div style="padding-bottom:10px; color:white;">
+            {{ form.name_of_product.errors }}
+            {{ form.name_of_product.label_tag }}
+            {{ form.name_of_product }}
+          </div>
+        </div>
+        <div id="{{ form.name_of_product.id }}" class="form-text" style="color:white; padding-bottom:20px;">
+          The name of the product you would like us to review must be 1-50 characters long.
+        </div>
+        <div class="col-md">
+          <div style="padding-bottom:10px; color:white;">
+            {{ form.average_rating.errors }}
+            {{ form.average_rating.label_tag }}
+            {{ form.average_rating }}
+          </div>
+        </div>
+        <div id="{{ form.name_of_product.id }}" class="form-text" style="color:white; padding-bottom:10px;">
+          The average rating of the product must be between 1.0 and 5.0. The rating must be given to 1 decimal place.
+        </div>
+        <div class="col-md">
+          <div style="padding-bottom:10px; color:white;">
+            {{ form.number_of_reviews.errors }}
+            {{ form.number_of_reviews.label_tag }}
+            {{ form.number_of_reviews }}
+          </div>
+        </div>
+        <div id="{{ form.number_of_reviews.id }}" class="form-text" style="color:white; padding-bottom:10px;">
+          The number of reviews must be a number greater or equal to 0.
+        </div>
+        <input type="submit" value="Review Rating" class="btn btn-primary btn-lg btn-dark">
+      </div>
+    </form>
+    <div class="container" style="padding:50px;">
+      {% if messages %}
+        <p class="lead" style="text-align:center; font-size:30px; color:white;">Results for "{{ name_of_product }}"</p>
+        <p style="font-size:20px; text-align:center; color:white;">{{ comment_on_score }}</p>
+        {% for message in messages %}
+          <div class="col" style="padding-bottom:20px; color:white;">
+            {{ message }}
+          </div>
+        {% endfor %}
+        <form action="{% url 'review_ratings' %}" method="get" style="text-align:center;">
+          <input type="submit" value="Review Another Rating" class="btn btn-primary btn-lg btn-dark">
+        </form>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
